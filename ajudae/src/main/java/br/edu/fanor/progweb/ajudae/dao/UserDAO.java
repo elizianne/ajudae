@@ -18,7 +18,7 @@ public class UserDAO {
 	
 	@SuppressWarnings("unchecked")
 	public List<Users> buscarPorNome(String nome) {
-		Query query = em.createQuery("select u from Users u where u.nome = :nome");
+		Query query = em.createQuery("select u from user u where u.nome = :nome");
 		query.setParameter("nome", nome);
 		return query.getResultList();
 	}
