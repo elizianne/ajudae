@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
-import br.edu.fanor.progweb.ajudae.entity.PricResposta;
+import br.edu.fanor.progweb.ajudae.entity.RespostaPrincipal;
 
 
 @Repository
@@ -13,19 +13,19 @@ public class PricRespostaDAO {
 	@PersistenceContext
 	private EntityManager em;
 	
-	public PricResposta getPorId(Long id) {
-		return em.find(PricResposta.class, id);
+	public RespostaPrincipal getPorId(Long id) {
+		return em.find(RespostaPrincipal.class, id);
 	}
 	
-	public void guardar(PricResposta pricResposta){
+	public void guardar(RespostaPrincipal pricResposta){
 		em.persist(pricResposta);
 	}
 	
-	public void editar(PricResposta pricResposta){
+	public void editar(RespostaPrincipal pricResposta){
 		em.merge(pricResposta);
 	}
 
-	public void deletar(PricResposta pricResposta){
+	public void deletar(RespostaPrincipal pricResposta){
 		em.remove(pricResposta);
 	}
 	

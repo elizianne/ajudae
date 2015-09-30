@@ -32,21 +32,21 @@ public class LoginManager {
 	private Usuarios usuario = new Usuarios();
 	private boolean existsEmail;
 
-	public String loggar() {
-		Usuarios usuario = this.usuarioBO.loggar(this.usuario.getEmail(),
-				Encripta.encripta(this.usuario.getSenha()));
-		this.usuario = new Usuarios();
-		if (usuario != null) {
-			seguranca.setUsuario(usuario);
-			existsEmail = true;
-			MessagesUtils.info("Bem vindo "+usuario.getNome());
-			return Navigation.SUCESSO;
-		} else {
-			existsEmail = false;
-			MessagesUtils.error("O e-mail ou a senha inseridos estão incorretos.");
-			return Navigation.FRACASSO;
-		}
-	}
+//	public String loggar() {
+//		Usuarios usuario = this.usuarioBO.loggar(this.usuario.getEmail(),
+//				Encripta.encripta(this.usuario.getSenha()));
+//		this.usuario = new Usuarios();
+//		if (usuario != null) {
+//			seguranca.setUsuario(usuario);
+//			existsEmail = true;
+//			MessagesUtils.info("Bem vindo "+usuario.getNome());
+//			return Navigation.SUCESSO;
+//		} else {
+//			existsEmail = false;
+//			MessagesUtils.error("O e-mail ou a senha inseridos estão incorretos.");
+//			return Navigation.FRACASSO;
+//		}
+//	}
 
 	/**
 	 * @return the usuario

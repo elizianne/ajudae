@@ -11,7 +11,8 @@ import br.edu.fanor.progweb.ajudae.aspectj.Loggable;
 import br.edu.fanor.progweb.ajudae.aspectj.PermitAll;
 import br.edu.fanor.progweb.ajudae.aspectj.RolesAllowed;
 import br.edu.fanor.progweb.ajudae.dao.UsuarioDAO;
-import br.edu.fanor.progweb.ajudae.entity.Usuarios;
+import br.edu.fanor.progweb.ajudae.entity.Users;
+import br.edu.fanor.progweb.ajudae.exceptions.BOException;
 import br.edu.fanor.progweb.ajudae.exceptions.DAOException;
 
 /**
@@ -25,40 +26,49 @@ public class UsuarioBO {
 	@Autowired
 	private UsuarioDAO usuarioDAO;
 
-	@RolesAllowed(value = { "INCLUIR_USUARIO" })
-	public void salvar(Usuarios usuario) {
-		usuario.setAtivo(false);
-		usuario.setPrimeiroAcesso(true);
+	public void salvar(Users usuario) throws BOException {
+		usuario.setAdministrador(false);
+		
+		Users usuarioComMesmoLogin = this.usuarioDAO.buscarPorLogin(usuario.getLogin());
+		if(usuarioComMesmoLogin != null){
+			throw new BOException("Login já cadastrado!");
+		}
+		
+		Users usuarioComMesmoEmail = this.usuarioDAO.buscarPorEmail(usuario.getEmail());
+		if(usuarioComMesmoEmail != null){
+			throw new BOException("Email já cadastrado!");
+		}
+		
 		usuarioDAO.salvar(usuario);
 	}
 
 	@RolesAllowed(value = { "ALTERAR_USUARIO" })
-	public void atualizar(Usuarios usuario) {
+	public void atualizar(Users usuario) {
 		usuarioDAO.atualizar(usuario);
 	}
 
 	@PermitAll
 	@Loggable(enable = false)
-	public Usuarios loggar(String email, String senha) {
+	public Users loggar(String email, String senha) {
 		return usuarioDAO.buscarPorEmailSenha(email, senha);
 	}
 
 	@PermitAll
 	@Loggable(enable = false)
-	public Usuarios buscarUsuarioPorEmail(String email) {
+	public Users buscarUsuarioPorEmail(String email) {
 		return usuarioDAO.buscarPorEmail(email);
 	}
 
 	@RolesAllowed(value = { "LISTAR_USUARIO" })
 	@Loggable(enable = false)
-	public List<Usuarios> listaUsuarioPorNome(String nome) {
-		List<Usuarios> usuarios = usuarioDAO.listarPorNome(nome);
-		return usuarios;
+	public List<Users> listaUsuarioPorNome(String nome) {
+		List<Users> Users = usuarioDAO.listarPorNome(nome);
+		return Users;
 	}
 
 	@PermitAll
 	@Loggable(enable = false)
-	public Usuarios buscarPorId(Integer id) {
+	public Users buscarPorId(Integer id) {
 		try {
 			return usuarioDAO.buscaPorId(id);
 		} catch (DAOException e) {
@@ -69,7 +79,7 @@ public class UsuarioBO {
 
 	@RolesAllowed(value = { "EXCLUIR_USUARIO" })
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public void excluir(Usuarios usuario) {
+	public void excluir(Users usuario) {
 		try {
 			usuario = usuarioDAO.buscaPorId(usuario.getId());
 		} catch (DAOException e) {

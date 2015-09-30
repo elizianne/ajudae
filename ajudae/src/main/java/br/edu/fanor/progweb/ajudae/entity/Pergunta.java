@@ -1,5 +1,7 @@
 package br.edu.fanor.progweb.ajudae.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "pergunta")
@@ -21,15 +25,16 @@ public class Pergunta {
 	private String descricao;
 
 	@ManyToOne
-	@JoinColumn(name="user_id", nullable=false)
-	private Users id_user;
+	@JoinColumn(name = "user_id", nullable = false)
+	private Users usuario;
 
 	@ManyToOne
-	@JoinColumn(name="categoria_id", nullable=false)
-	private Categoria id_categoria;
+	@JoinColumn(name = "categoria_id", nullable = false)
+	private Categoria categoria;
 
-	@Column(nullable = false)
-	private String dt_pergunta;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_pergunta", nullable = false)
+	private Date dataPergunta;
 
 	public Integer getId() {
 		return id;
@@ -47,28 +52,28 @@ public class Pergunta {
 		this.descricao = descricao;
 	}
 
-	public Users getId_user() {
-		return id_user;
+	public Users getUsuario() {
+		return usuario;
 	}
 
-	public void setId_user(Users id_user) {
-		this.id_user = id_user;
+	public void setUsuario(Users usuario) {
+		this.usuario = usuario;
 	}
 
-	public Categoria getId_categoria() {
-		return id_categoria;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	public void setId_categoria(Categoria id_categoria) {
-		this.id_categoria = id_categoria;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
-	public String getDt_pergunta() {
-		return dt_pergunta;
+	public Date getDataPergunta() {
+		return dataPergunta;
 	}
 
-	public void setDt_pergunta(String dt_pergunta) {
-		this.dt_pergunta = dt_pergunta;
+	public void setDataPergunta(Date dataPergunta) {
+		this.dataPergunta = dataPergunta;
 	}
 
 }

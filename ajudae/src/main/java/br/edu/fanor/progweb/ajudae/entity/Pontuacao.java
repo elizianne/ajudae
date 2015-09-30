@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -17,12 +18,15 @@ public class Pontuacao {
 	private Integer id;
 
 	@OneToOne
-	@JoinColumn(name="user_id", nullable=false)
+	@JoinColumn(name = "user_id", nullable = false)
 	private Users id_user;
 
 	@Column(nullable = false)
-	private Integer pontos;
+	private Integer quantidadePontos;
 
+	@ManyToOne
+	@JoinColumn(name = "resposta_id", nullable = false)
+	private RespostaPrincipal resposta;
 
 	public Integer getId() {
 		return id;
@@ -40,12 +44,20 @@ public class Pontuacao {
 		this.id_user = id_user;
 	}
 
-	public Integer getPontuacao() {
-		return pontos;
+	public Integer getQuantidadePontos() {
+		return quantidadePontos;
 	}
 
-	public void setPontos(Integer pontos) {
-		this.pontos = pontos;
+	public void setQuantidadePontos(Integer quantidadePontos) {
+		this.quantidadePontos = quantidadePontos;
+	}
+
+	public RespostaPrincipal getResposta() {
+		return resposta;
+	}
+
+	public void setResposta(RespostaPrincipal resposta) {
+		this.resposta = resposta;
 	}
 
 }

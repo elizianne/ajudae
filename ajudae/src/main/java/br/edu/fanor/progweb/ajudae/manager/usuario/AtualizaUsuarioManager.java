@@ -23,18 +23,18 @@ public class AtualizaUsuarioManager {
 	private UsuarioBO usuarioBO;
 	private Usuarios usuarioSelecionado;
 
-	public String atualizar() {
-		usuarioBO.atualizar(usuarioSelecionado);
-		MessagesUtils.info("Usuário atualizado com sucesso!");
-
-		return Navigation.SUCESSO;
-	}
-
-	public String preparaAtualizar(Usuarios usuario) {
-		usuarioSelecionado = usuarioBO.buscarPorId(usuario.getId());
-
-		return Navigation.ATUALIZA;
-	}
+//	public String atualizar() {
+//		usuarioBO.atualizar(usuarioSelecionado);
+//		MessagesUtils.info("Usuário atualizado com sucesso!");
+//
+//		return Navigation.SUCESSO;
+//	}
+//
+//	public String preparaAtualizar(Usuarios usuario) {
+//		usuarioSelecionado = usuarioBO.buscarPorId(usuario.getId());
+//
+//		return Navigation.ATUALIZA;
+//	}
 	
 	public void limparDados(){
 		usuarioSelecionado.setNome("");

@@ -1,12 +1,17 @@
 package br.edu.fanor.progweb.ajudae.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "sub_resposta")
@@ -20,14 +25,16 @@ public class SubResposta{
 	private String descricao;
 
 	@ManyToOne
-	@Column(nullable = false)
-	private Users id_user;
+	@JoinColumn(name="user_id", nullable = false)
+	private Users usuario;
 
-	@Column(nullable = false)
-	private Integer id_pergPrinc;
+	@ManyToOne
+	@JoinColumn(name="resposta_principal_id", nullable = false)
+	private RespostaPrincipal respostaPrincipal;
 
-	@Column(nullable = false)
-	private String dt_resp;
+	@Column(name="data_resposta",nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataResposta;
 
 	public Integer getId() {
 		return id;
@@ -45,28 +52,28 @@ public class SubResposta{
 		this.descricao = descricao;
 	}
 
-	public Users getId_user() {
-		return id_user;
+	public Users getUsuario() {
+		return usuario;
 	}
 
-	public void setId_user(Users id_user) {
-		this.id_user = id_user;
+	public void setUsuario(Users usuario) {
+		this.usuario = usuario;
 	}
 
-	public Integer getId_pergPrinc() {
-		return id_pergPrinc;
+	public RespostaPrincipal getRespostaPrincipal() {
+		return respostaPrincipal;
 	}
 
-	public void setId_pergPrinc(Integer id_pergPrinc) {
-		this.id_pergPrinc = id_pergPrinc;
+	public void setRespostaPrincipal(RespostaPrincipal respostaPrincipal) {
+		this.respostaPrincipal = respostaPrincipal;
 	}
 
-	public String getDt_resp() {
-		return dt_resp;
+	public Date getDataResposta() {
+		return dataResposta;
 	}
 
-	public void setDt_resp(String dt_resp) {
-		this.dt_resp = dt_resp;
+	public void setDataResposta(Date dataResposta) {
+		this.dataResposta = dataResposta;
 	}
 
 }

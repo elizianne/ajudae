@@ -28,17 +28,17 @@ public class UsuarioDAOTest {
 		usuario.setEmail("adriano@gmail.com");
 		usuario.setPrimeiroAcesso(true);
 		usuario.setAtivo(false);
-		usuarioDAO.salvar(usuario);
+//		usuarioDAO.salvar(usuario);
 		
 		Assert.assertNotNull(usuario.getId());
 		System.out.println(usuario.getId());
 		
 	}
 	
-	@Test
-	public void testListaPorNome(){
-		List<Usuarios> usuarios = usuarioDAO.listarPorNome("adri");
-		Assert.assertEquals(1, usuarios.size());
-	}
+//	@Test
+//	public void testListaPorNome(){
+////		List<Usuarios> usuarios = usuarioDAO.listarPorNome("adri");
+//		Assert.assertEquals(1, usuarios.size());
+//	}
 
 }

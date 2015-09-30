@@ -1,7 +1,5 @@
 package br.edu.fanor.progweb.ajudae.manager.usuario;
 
-import java.util.ArrayList;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -9,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.edu.fanor.progweb.ajudae.bussines.UsuarioBO;
-import br.edu.fanor.progweb.ajudae.entity.Papeis;
-import br.edu.fanor.progweb.ajudae.entity.Usuarios;
+import br.edu.fanor.progweb.ajudae.entity.Users;
+import br.edu.fanor.progweb.ajudae.exceptions.BOException;
 import br.edu.fanor.progweb.ajudae.utils.Encripta;
 import br.edu.fanor.progweb.ajudae.utils.MessagesUtils;
 import br.edu.fanor.progweb.ajudae.utils.Navigation;
@@ -30,19 +28,24 @@ public class CadUsuarioManager {
 	private String nome;
 	private String email;
 	private String senha;
+	private String login;
 	
 	public String salvar(){
-		Usuarios usuario = new Usuarios();
+		
+		Users usuario = new Users();
 		usuario.setNome(nome);
 		usuario.setEmail(email);
 		usuario.setSenha(Encripta.encripta(senha));
-		Papeis p = new Papeis();
-		p.setNome("Administrador");
-		usuario.setPapeis(new ArrayList<Papeis>());
-		usuario.getPapeis().add(p);
-		usuarioBO.salvar(usuario);
-		MessagesUtils.info("Usuário salvo com sucesso!");
-		listUsuario.lista();
+		usuario.setLogin(login);
+		
+		try {
+			usuarioBO.salvar(usuario);
+			MessagesUtils.info("Usuário salvo com sucesso!");
+		} catch (BOException e) {
+			MessagesUtils.error(e.getMessage());
+			e.printStackTrace();
+			return Navigation.FRACASSO;
+		}
 		
 		return Navigation.SUCESSO;
 	}
@@ -50,7 +53,7 @@ public class CadUsuarioManager {
 	public String preparaSalvar(){
 		this.limpaDados();
 		
-		return Navigation.SUCESSO;
+		return Navigation.CADASTRO;
 	}
 			
 	public void limpaDados(){
@@ -79,5 +82,13 @@ public class CadUsuarioManager {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	
 	
 }

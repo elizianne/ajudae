@@ -1,5 +1,7 @@
 package br.edu.fanor.progweb.ajudae.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,10 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "princ_resposta")
-public class PricResposta {
+public class RespostaPrincipal {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,15 +25,19 @@ public class PricResposta {
 	private String descricao;
 
 	@ManyToOne
-	@JoinColumn(name="user_id", nullable=false)
+	@JoinColumn(name = "user_id", nullable = false)
 	private Users user;
 
 	@ManyToOne
-	@JoinColumn(name="pergunta", nullable=false)
+	@JoinColumn(name = "pergunta_id", nullable = false)
 	private Pergunta pergunta;
 
-	@Column(nullable = false)
-	private String dt_resp;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_resposta", nullable = false)
+	private Date dataResposta;
+	
+	@Column
+	private Boolean escolhida;
 
 	public Integer getId() {
 		return id;
@@ -47,27 +55,36 @@ public class PricResposta {
 		this.descricao = descricao;
 	}
 
-	public Users getId_user() {
+	public Users getUser() {
 		return user;
 	}
 
-	public void setId_user(Users id_user) {
-		this.user = id_user;
+	public void setUser(Users user) {
+		this.user = user;
 	}
 
-	public Pergunta getId_pergunta() {
+	public Pergunta getPergunta() {
 		return pergunta;
 	}
 
-	public void setId_pergunta(Pergunta id_pergunta) {
-		this.pergunta = id_pergunta;
+	public void setPergunta(Pergunta pergunta) {
+		this.pergunta = pergunta;
 	}
 
-	public String getDt_resp() {
-		return dt_resp;
+	public Date getDataResposta() {
+		return dataResposta;
 	}
 
-	public void setDt_resp(String dt_resp) {
-		this.dt_resp = dt_resp;
+	public void setDataResposta(Date dataResposta) {
+		this.dataResposta = dataResposta;
 	}
+
+	public Boolean getEscolhida() {
+		return escolhida;
+	}
+
+	public void setEscolhida(Boolean escolhida) {
+		this.escolhida = escolhida;
+	}
+
 }

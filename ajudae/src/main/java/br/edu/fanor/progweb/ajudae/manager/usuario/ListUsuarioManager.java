@@ -25,16 +25,16 @@ public class ListUsuarioManager {
 	private String nome;
 	private List<Usuarios> usuarios;
 	
-	public void lista(){
-		
-		usuarios = usuarioBO.listaUsuarioPorNome(nome);
-		
-	}
-	
-	public void excluir(Usuarios usuario){
-		usuarioBO.excluir(usuario);
-		usuarios = usuarioBO.listaUsuarioPorNome(nome);
-	}
+//	public void lista(){
+//		
+//		usuarios = usuarioBO.listaUsuarioPorNome(nome);
+//		
+//	}
+//	
+//	public void excluir(Usuarios usuario){
+//		usuarioBO.excluir(usuario);
+//		usuarios = usuarioBO.listaUsuarioPorNome(nome);
+//	}
 	
 	public String preparaAtualizar(Usuarios usuario){
 		System.out.println(usuario.getNome());

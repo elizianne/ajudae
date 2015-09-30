@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.edu.fanor.progweb.ajudae.entity.Usuarios;
+import br.edu.fanor.progweb.ajudae.entity.Users;
 import br.edu.fanor.progweb.ajudae.exceptions.DAOException;
 
 /**
@@ -28,68 +28,82 @@ public class UsuarioDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void salvar(Usuarios usuario) {
+	public void salvar(Users usuario) {
 		entityManager.persist(usuario);
 	}
 	
-	public void atualizar(Usuarios usuario){
+	public void atualizar(Users usuario){
 		entityManager.merge(usuario);
 	}
 	
-	public Usuarios buscarPorEmail(String email){
+	public Users buscarPorEmail(String email){
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Usuarios> criteriaQuery = criteriaBuilder.createQuery(Usuarios.class);
-		Root<Usuarios> usuarios = criteriaQuery.from(Usuarios.class);
-		criteriaQuery.where(criteriaBuilder.equal(usuarios.<String>get("email"), email));
+		CriteriaQuery<Users> criteriaQuery = criteriaBuilder.createQuery(Users.class);
+		Root<Users> Users = criteriaQuery.from(Users.class);
+		criteriaQuery.where(criteriaBuilder.equal(Users.<String>get("email"), email));
 		
 		Query query = entityManager.createQuery(criteriaQuery);
 		try {
-			return (Usuarios)query.getSingleResult();
+			return (Users)query.getSingleResult();
 		} catch(NoResultException e){
 			return null;
 		}
 	}
 	
-	public Usuarios buscarPorEmailSenha(String email, String senha){
+	public Users buscarPorLogin(String login){
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Usuarios> criteriaQuery = criteriaBuilder.createQuery(Usuarios.class);
-		Root<Usuarios> usuarios = criteriaQuery.from(Usuarios.class);
-		criteriaQuery.where(criteriaBuilder.equal(usuarios.<String>get("email"), email));
-		criteriaQuery.where(criteriaBuilder.equal(usuarios.<String>get("senha"), senha));
+		CriteriaQuery<Users> criteriaQuery = criteriaBuilder.createQuery(Users.class);
+		Root<Users> Users = criteriaQuery.from(Users.class);
+		criteriaQuery.where(criteriaBuilder.equal(Users.<String>get("login"), login));
 		
 		Query query = entityManager.createQuery(criteriaQuery);
 		try {
-			return (Usuarios)query.getSingleResult();
+			return (Users)query.getSingleResult();
+		} catch(NoResultException e){
+			return null;
+		}
+	}
+		
+	public Users buscarPorEmailSenha(String email, String senha){
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Users> criteriaQuery = criteriaBuilder.createQuery(Users.class);
+		Root<Users> Users = criteriaQuery.from(Users.class);
+		criteriaQuery.where(criteriaBuilder.equal(Users.<String>get("email"), email));
+		criteriaQuery.where(criteriaBuilder.equal(Users.<String>get("senha"), senha));
+		
+		Query query = entityManager.createQuery(criteriaQuery);
+		try {
+			return (Users)query.getSingleResult();
 		} catch(NoResultException e){
 			return null;
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Usuarios> listarPorNome(String nome) {
+	public List<Users> listarPorNome(String nome) {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Usuarios> criteriaQuery = criteriaBuilder.createQuery(Usuarios.class);
-		Root<Usuarios> usuarios = criteriaQuery.from(Usuarios.class);
-		criteriaQuery.where(criteriaBuilder.like(usuarios.<String>get("nome"), "%"+nome+"%"));
+		CriteriaQuery<Users> criteriaQuery = criteriaBuilder.createQuery(Users.class);
+		Root<Users> Users = criteriaQuery.from(Users.class);
+		criteriaQuery.where(criteriaBuilder.like(Users.<String>get("nome"), "%"+nome+"%"));
 		
 		Query query = entityManager.createQuery(criteriaQuery);
 		return query.getResultList();
 	}
 	
-	public Usuarios buscaPorId(Integer id) throws DAOException {
-		String jpql = "select u from Usuarios u where u.id = :id";
+	public Users buscaPorId(Integer id) throws DAOException {
+		String jpql = "select u from Users u where u.id = :id";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("id", id);
 		
 		try {
-			return (Usuarios) query.getSingleResult();
+			return (Users) query.getSingleResult();
 		} catch(NoResultException e){
 			return null;
 		} 
 		
 	}
 	
-	public void excluir(Usuarios usuario) {
+	public void excluir(Users usuario) {
 		entityManager.remove(usuario);
 	}
 }
