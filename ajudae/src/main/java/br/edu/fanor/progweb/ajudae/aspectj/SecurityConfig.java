@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import br.edu.fanor.progweb.ajudae.entity.Papeis;
 import br.edu.fanor.progweb.ajudae.entity.Permissoes;
+import br.edu.fanor.progweb.ajudae.entity.Users;
 import br.edu.fanor.progweb.ajudae.entity.Usuarios;
 import br.edu.fanor.progweb.ajudae.to.SegurancaTO;
 
@@ -47,8 +48,8 @@ public class SecurityConfig {
 			return;
 		}
 
-		// Contexto de segurança do usuário logado
-		Usuarios usuario = this.segurancaTO.getUsuario();
+		//Verifica o usuario logado e suas permissões
+		Users usuario = this.segurancaTO.getUsuario();
 		if (usuario == null || !this.segurancaTO.isAutenticado()) {
 			this.dispararAcessoNegado();
 		}
@@ -87,7 +88,7 @@ public class SecurityConfig {
 	 * @param usuario
 	 * @return Lista de permissoes do usuario
 	 */
-	private List<String> retornaPermissoesDoUsuario(Usuarios usuario) {
+	private List<String> retornaPermissoesDoUsuario(Users usuario) {
 		List<String> permissoesDoUsuario = new ArrayList<String>();
 		for (Papeis papel : usuario.getPapeis()) {
 			for (Permissoes permissao : papel.getPermissoes()) {

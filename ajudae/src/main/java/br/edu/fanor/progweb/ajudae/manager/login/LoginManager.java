@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.edu.fanor.progweb.ajudae.bussines.UsuarioBO;
-import br.edu.fanor.progweb.ajudae.entity.Usuarios;
+import br.edu.fanor.progweb.ajudae.entity.Users;
 import br.edu.fanor.progweb.ajudae.to.SegurancaTO;
 import br.edu.fanor.progweb.ajudae.utils.Encripta;
 import br.edu.fanor.progweb.ajudae.utils.MessagesUtils;
@@ -29,29 +29,29 @@ public class LoginManager {
 	private UsuarioBO usuarioBO;
 	@Autowired
 	private SegurancaTO seguranca;
-	private Usuarios usuario = new Usuarios();
+	private Users usuario = new Users();
 	private boolean existsEmail;
 
-//	public String loggar() {
-//		Usuarios usuario = this.usuarioBO.loggar(this.usuario.getEmail(),
-//				Encripta.encripta(this.usuario.getSenha()));
-//		this.usuario = new Usuarios();
-//		if (usuario != null) {
-//			seguranca.setUsuario(usuario);
-//			existsEmail = true;
-//			MessagesUtils.info("Bem vindo "+usuario.getNome());
-//			return Navigation.SUCESSO;
-//		} else {
-//			existsEmail = false;
-//			MessagesUtils.error("O e-mail ou a senha inseridos estão incorretos.");
-//			return Navigation.FRACASSO;
-//		}
-//	}
+	public String loggar() {
+		Users usuario = this.usuarioBO.loggar(this.usuario.getEmail(),
+				Encripta.encripta(this.usuario.getSenha()));
+		this.usuario = new Users();
+		if (usuario != null) {
+			seguranca.setUsuario(usuario);
+			existsEmail = true;
+			MessagesUtils.info("Bem vindo "+usuario.getNome());
+			return Navigation.SUCESSO;
+		} else {
+			existsEmail = false;
+			MessagesUtils.error("O login ou a senha inseridos estão incorretos.");
+			return Navigation.FRACASSO;
+		}
+	}
 
 	/**
 	 * @return the usuario
 	 */
-	public Usuarios getUsuario() {
+	public Users getUsuario() {
 		return usuario;
 	}
 
@@ -59,7 +59,7 @@ public class LoginManager {
 	 * @param usuario
 	 *            the usuario to set
 	 */
-	public void setUsuario(Usuarios usuario) {
+	public void setUsuario(Users usuario) {
 		this.usuario = usuario;
 	}
 

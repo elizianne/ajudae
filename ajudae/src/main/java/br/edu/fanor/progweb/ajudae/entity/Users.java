@@ -1,10 +1,17 @@
 package br.edu.fanor.progweb.ajudae.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +36,21 @@ public class Users {
 	
 	@Column
 	private Boolean administrador;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name = "perfis", 
+		joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id") , 
+		inverseJoinColumns = @JoinColumn(name = "papel_id", referencedColumnName = "id") )
+	private List<Papeis> papeis;
+	
+
+	public List<Papeis> getPapeis() {
+		return papeis;
+	}
+
+	public void setPapeis(List<Papeis> papeis) {
+		this.papeis = papeis;
+	}
 
 	public Integer getId() {
 		return id;
