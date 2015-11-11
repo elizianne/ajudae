@@ -19,7 +19,7 @@ public class Pontuacao {
 
 	@OneToOne
 	@JoinColumn(name = "user_id", nullable = false)
-	private Users id_user;
+	private Usuarios id_user;
 
 	@Column(nullable = false)
 	private Integer quantidadePontos;
@@ -36,11 +36,11 @@ public class Pontuacao {
 		this.id = id;
 	}
 
-	public Users getId_user() {
+	public Usuarios getId_user() {
 		return id_user;
 	}
 
-	public void setId_user(Users id_user) {
+	public void setId_user(Usuarios id_user) {
 		this.id_user = id_user;
 	}
 

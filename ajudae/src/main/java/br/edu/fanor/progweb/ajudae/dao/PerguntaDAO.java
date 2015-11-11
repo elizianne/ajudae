@@ -7,10 +7,13 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.fanor.progweb.ajudae.entity.Pergunta;
 
 @Repository
+@Transactional(propagation=Propagation.REQUIRED)
 public class PerguntaDAO {
 
 	@PersistenceContext
@@ -27,7 +30,7 @@ public class PerguntaDAO {
 		return em.find(Pergunta.class, id);
 	}
 	
-	public void guardar(Pergunta perguntas){
+	public void salvar(Pergunta perguntas){
 		em.persist(perguntas);
 	}
 	

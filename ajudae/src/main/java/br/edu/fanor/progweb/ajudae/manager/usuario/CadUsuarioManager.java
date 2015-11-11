@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.edu.fanor.progweb.ajudae.bussines.UsuarioBO;
-import br.edu.fanor.progweb.ajudae.entity.Users;
+import br.edu.fanor.progweb.ajudae.entity.Usuarios;
 import br.edu.fanor.progweb.ajudae.exceptions.BOException;
 import br.edu.fanor.progweb.ajudae.utils.Encripta;
 import br.edu.fanor.progweb.ajudae.utils.MessagesUtils;
@@ -32,7 +32,7 @@ public class CadUsuarioManager {
 	
 	public String salvar(){
 		
-		Users usuario = new Users();
+		Usuarios usuario = new Usuarios();
 		usuario.setNome(nome);
 		usuario.setEmail(email);
 		usuario.setSenha(Encripta.encripta(senha));
@@ -40,6 +40,7 @@ public class CadUsuarioManager {
 		
 		try {
 			usuarioBO.salvar(usuario);
+			limpaDados();
 			MessagesUtils.info("Usuário salvo com sucesso!");
 		} catch (BOException e) {
 			MessagesUtils.error(e.getMessage());
@@ -60,6 +61,7 @@ public class CadUsuarioManager {
 		this.nome = "";
 		this.email = "";
 		this.senha = "";
+		this.login = "";
 	}
 
 	public String getNome() {

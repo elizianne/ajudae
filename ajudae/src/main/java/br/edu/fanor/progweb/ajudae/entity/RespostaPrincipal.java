@@ -26,7 +26,7 @@ public class RespostaPrincipal {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
-	private Users user;
+	private Usuarios user;
 
 	@ManyToOne
 	@JoinColumn(name = "pergunta_id", nullable = false)
@@ -55,11 +55,11 @@ public class RespostaPrincipal {
 		this.descricao = descricao;
 	}
 
-	public Users getUser() {
+	public Usuarios getUser() {
 		return user;
 	}
 
-	public void setUser(Users user) {
+	public void setUser(Usuarios user) {
 		this.user = user;
 	}
 

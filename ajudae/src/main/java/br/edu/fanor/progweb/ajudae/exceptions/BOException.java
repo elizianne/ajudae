@@ -14,5 +14,9 @@ public class BOException extends Exception {
 	public BOException(String msg) {
 		super(msg);
 	}
+	
+	public BOException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
 }

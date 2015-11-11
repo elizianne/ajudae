@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.edu.fanor.progweb.ajudae.bussines.UsuarioBO;
-import br.edu.fanor.progweb.ajudae.entity.Users;
+import br.edu.fanor.progweb.ajudae.entity.Usuarios;
 import br.edu.fanor.progweb.ajudae.to.SegurancaTO;
 import br.edu.fanor.progweb.ajudae.utils.Encripta;
 import br.edu.fanor.progweb.ajudae.utils.MessagesUtils;
@@ -28,54 +28,39 @@ public class LoginManager {
 	@Autowired
 	private UsuarioBO usuarioBO;
 	@Autowired
-	private SegurancaTO seguranca;
-	private Users usuario = new Users();
-	private boolean existsEmail;
+	private SegurancaTO segurancaTO;
+	private String login;
+	private String senha;
 
 	public String loggar() {
-		Users usuario = this.usuarioBO.loggar(this.usuario.getEmail(),
-				Encripta.encripta(this.usuario.getSenha()));
-		this.usuario = new Users();
+		Usuarios usuario = this.usuarioBO.loggar(this.login,
+				Encripta.encripta(this.senha));
+		
 		if (usuario != null) {
-			seguranca.setUsuario(usuario);
-			existsEmail = true;
+			segurancaTO.setUsuario(usuario);
 			MessagesUtils.info("Bem vindo "+usuario.getNome());
-			return Navigation.SUCESSO;
+			return Navigation.LOGADO;
 		} else {
-			existsEmail = false;
 			MessagesUtils.error("O login ou a senha inseridos estão incorretos.");
 			return Navigation.FRACASSO;
 		}
 	}
 
-	/**
-	 * @return the usuario
-	 */
-	public Users getUsuario() {
-		return usuario;
+	public String getLogin() {
+		return login;
 	}
 
-	/**
-	 * @param usuario
-	 *            the usuario to set
-	 */
-	public void setUsuario(Users usuario) {
-		this.usuario = usuario;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
-	/**
-	 * @return the existsEmail
-	 */
-	public boolean isExistsEmail() {
-		return existsEmail;
+	public String getSenha() {
+		return senha;
 	}
 
-	/**
-	 * @param existsEmail
-	 *            the existsEmail to set
-	 */
-	public void setExistsEmail(boolean existsEmail) {
-		this.existsEmail = existsEmail;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
+	
 }

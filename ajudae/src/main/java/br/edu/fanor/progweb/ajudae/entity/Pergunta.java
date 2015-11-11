@@ -22,11 +22,14 @@ public class Pergunta {
 	private Integer id;
 
 	@Column(nullable = false)
+	private String titulo;
+
+	@Column(nullable = false)
 	private String descricao;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
-	private Users usuario;
+	private Usuarios usuario;
 
 	@ManyToOne
 	@JoinColumn(name = "categoria_id", nullable = false)
@@ -44,6 +47,14 @@ public class Pergunta {
 		this.id = id;
 	}
 
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -52,11 +63,11 @@ public class Pergunta {
 		this.descricao = descricao;
 	}
 
-	public Users getUsuario() {
+	public Usuarios getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Users usuario) {
+	public void setUsuario(Usuarios usuario) {
 		this.usuario = usuario;
 	}
 

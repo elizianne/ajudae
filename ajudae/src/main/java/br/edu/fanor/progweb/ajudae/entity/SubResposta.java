@@ -26,7 +26,7 @@ public class SubResposta{
 
 	@ManyToOne
 	@JoinColumn(name="user_id", nullable = false)
-	private Users usuario;
+	private Usuarios usuario;
 
 	@ManyToOne
 	@JoinColumn(name="resposta_principal_id", nullable = false)
@@ -52,11 +52,11 @@ public class SubResposta{
 		this.descricao = descricao;
 	}
 
-	public Users getUsuario() {
+	public Usuarios getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Users usuario) {
+	public void setUsuario(Usuarios usuario) {
 		this.usuario = usuario;
 	}
 
