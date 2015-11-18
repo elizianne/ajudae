@@ -10,11 +10,6 @@
 </h:head>
 <h:body>
 	<h:panelGroup id="page" layout="block">
-		<div id="header">
-			<ui:insert name="header">
-				<ui:include src="/templates/header.xhtml" />
-			</ui:insert>
-		</div>
 		<h:panelGroup id="container" layout="block">
 			<div id="sidebar">
 				<ui:insert name="sidebar">
@@ -25,11 +20,6 @@
 				<ui:insert name="content" />
 			</h:panelGroup>
 		</h:panelGroup>
-		<div id="footer">
-			<ui:insert name="footer">
-				<ui:include src="/templates/footer.xhtml" />
-			</ui:insert>
-		</div>
 	</h:panelGroup>
 
 </h:body>
