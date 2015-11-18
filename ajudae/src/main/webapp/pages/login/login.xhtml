@@ -5,7 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/templates/template_login.xhtml">
-	<ui:define name="content">
+	<ui:define name="content">   
+	
 		<h:form id="formLogin">
 
 			<p:messages id="messages" showDetail="true" autoUpdate="true"
@@ -33,13 +34,15 @@
 			
 		</h:form>
 
+		<br />
 
+		<h2>Cadastre-se você também!</h2>
 
+		<br />
+		
 		<h:form id="formCadUsuario">
 			<f:validateBean>
-				<h2>Cadastro de Usuários</h2>
-
-				<br />				
+				
 				<h:panelGrid id="gridUser" columns="4" styleClass="panelgrid">
 					<p:outputLabel value="Nome: " />
 					<font color="red">*</font>
@@ -67,18 +70,23 @@
 						strongLabel="Forte" />
 					<p:message for="senha" />
 				</h:panelGrid>
+				
 				<br />
-				<h:panelGrid columns="3" styleClass="panelgrid">
+				
+				<h:panelGrid columns="2" styleClass="panelgridButton">
 					<p:commandButton value="Salvar" action="#{cadUsuario.salvar}"
 						ajax="false" />
 					<p:commandButton value="Limpar"
 						actionListener="#{cadUsuario.limpaDados}" update="@form"
 						type="reset" />
 				</h:panelGrid>
+				
+				<p:column>    
+    				<p:graphicImage value="logo.png" class="logo" />    
+				</p:column> 
+				
 			</f:validateBean>
 		</h:form>
-
-
 
 	</ui:define>
 </ui:composition>

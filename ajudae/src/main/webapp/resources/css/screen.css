@@ -55,7 +55,7 @@ a {
 
 #page {
 	background: #ffffff;
-	width: 960px;
+	width: 740px;
 	margin-left: auto;
 	margin-right: auto;
 	border-right: solid 2px #a0a0a0;
@@ -63,7 +63,7 @@ a {
 	box-shadow: 0 0 40px #999;
 	border-radius: 25px;
 	overflow: hidden;
-	margin-top: 10px;
+	margin-top: 80px;
 	a0a0a0;
 }
 
@@ -99,12 +99,15 @@ a {
 	min-height: 320px;
 	font-size: 120%;
 	width: 100%;
+	margin-top: 20px;
 	margin-left: 0 auto;
 	margin-right: 20px !important;
 }
 
 #content h2 {
-	text-align: center
+	margin-top: 10px;
+	text-align: right;
+	margin-right: 18px;
 }
 
 #footer {
@@ -142,12 +145,18 @@ a {
 }
 
 .panelgrid {
-	margin: 0 auto;
+	margin-right: 10px;
+	margin-left: auto;
+}
+
+.panelgridButton {
+	margin-top: 10px;
+	margin-right: 50px;
+	margin-left: auto;
 }
 
 .panelgridlogin{
-	margin-left: 400px;
-	margin-top: 5px;
+	margin-left: auto;
 }
 
 .panelgrid input[type=text], .panelgrid input[type=password] {
@@ -207,4 +216,11 @@ a {
 
 .property {
 	margin-bottom: 12px;
+}
+
+.logo {
+	float: left;
+	width: 400px; 
+	margin-top: -200px;
+	margin-left: 5px;
 }
